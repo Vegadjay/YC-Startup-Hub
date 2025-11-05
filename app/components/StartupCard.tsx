@@ -1,20 +1,48 @@
-import { formatDate } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import React from 'react'
-import { EyeIcon } from 'lucide-react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Startup, Author } from '@/sanity.types'
+import { formatDate } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import React from "react";
+import { EyeIcon } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
-export type StartupTypeCard = Omit<Startup, 'author'> & { 
-  author?: Author
-}
+export type Author = {
+  _id: string;
+  name?: string;
+  username?: string;
+  bio?: string;
+  profilePicture?: string;
+};
+
+export type StartupTypeCard = {
+  _id: string;
+  title?: string;
+  slug?: {
+    _type: string;
+    current?: string;
+  };
+  _createdAt: string;
+  author?: Author;
+  views?: number;
+  description?: string;
+  category?: string;
+  image?: string;
+  pitch?: string;
+};
 
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
-  const { _createdAt, views, author, title, _id, category, image, description } = post;
-  const authorName = author?.name || "Unknown Author"; 
-  const authorProfilePic = author?.profilePicture || "/default-profile-pic.jpg"; 
-  const imageUrl = image || '/placeholder-image.jpg';
+  const {
+    _createdAt,
+    views,
+    author,
+    title,
+    _id,
+    category,
+    image,
+    description,
+  } = post;
+  const authorName = author?.name || "Unknown Author";
+  const authorProfilePic = author?.profilePicture || "/default-profile-pic.jpg";
+  const imageUrl = image || "/placeholder-image.jpg";
 
   return (
     <>
@@ -49,16 +77,14 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </div>
 
         <div className="mt-3">
-          <p className="text-14 line-clamp-2">{description || "No description available."}</p>
+          <p className="text-14 line-clamp-2">
+            {description || "No description available."}
+          </p>
         </div>
 
         <div className="mt-5">
           <Link href={`/startup/${_id}`}>
-            <img
-              src={imageUrl}
-              className="rounded-xl hover:scale-105 hover:transition-all hover:ease-in-out"
-              alt="Startup"
-            />
+            <img src={imageUrl} className="rounded-xl " alt="Startup" />
           </Link>
         </div>
 
@@ -73,7 +99,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </div>
       </li>
     </>
-  )
-}
+  );
+};
 
-export default StartupCard
+export default StartupCard;

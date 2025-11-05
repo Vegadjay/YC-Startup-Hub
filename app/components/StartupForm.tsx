@@ -39,14 +39,40 @@ const StartupForm = () => {
         });
 
         router.push(`/startup/${result._id}`);
+      } else if (result.status == "ERROR") {
+        // Handle server-side validation errors
+        if (result.validationErrors) {
+          setErrors(result.validationErrors as Record<string, string>);
+          toast({
+            title: "Validation Error",
+            description:
+              result.error || "Please check your inputs and try again",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: result.error || "An error occurred",
+            variant: "destructive",
+          });
+        }
       }
 
       return result;
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const fieldErorrs = error.flatten().fieldErrors;
+        const fieldErrors = error.flatten().fieldErrors;
 
-        setErrors(fieldErorrs as unknown as Record<string, string>);
+        // Convert Zod field errors (which can be arrays) to string format
+        const formattedErrors: Record<string, string> = {};
+        Object.keys(fieldErrors).forEach((key) => {
+          const errorValue = fieldErrors[key];
+          formattedErrors[key] = Array.isArray(errorValue)
+            ? errorValue.join(", ")
+            : errorValue || "";
+        });
+
+        setErrors(formattedErrors);
 
         toast({
           title: "Error",
@@ -101,6 +127,8 @@ const StartupForm = () => {
           id="description"
           name="description"
           className="startup-form_textarea"
+          rows={5}
+          cols={50}
           required
           placeholder="Startup Description"
         />

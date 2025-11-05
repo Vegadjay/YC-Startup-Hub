@@ -15,6 +15,7 @@ A cutting-edge e-commerce solution built with Next.js, featuring a sleek Figma-i
 ![Product Page](./public/SS_Startup.png "Product detail page with gallery and information")
 
 - 🔐 **Advanced Authentication**
+
   - Secure user authentication with NextAuth.js
   - Social login providers integration
   - Protected routes and middleware
@@ -50,16 +51,19 @@ A cutting-edge e-commerce solution built with Next.js, featuring a sleek Figma-i
 ## Getting Started
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/project-name.git
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
@@ -70,6 +74,7 @@ NEXTAUTH_URL=http://localhost:3000
 ```
 
 4. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -93,23 +98,27 @@ npm run dev
 ## Key Features Implementation
 
 ### Authentication Flow
+
 - Custom NextAuth configuration with multiple providers
 - Protected API routes and middleware
 - Session management and persistence
 
 ### Content Management
+
 - Sanity Studio integration
 - Custom schemas for products, categories, and users
 - Real-time content updates
 - Image optimization and CDN delivery
 
 ### Form Handling
+
 - Zod schemas for validation
 - Custom form hooks
 - Error handling and user feedback
 - File upload integration
 
 ### Styling Approach
+
 - Tailwind CSS for rapid development
 - Custom CSS for unique components
 - Responsive design principles
@@ -117,11 +126,11 @@ npm run dev
 
 ## API Routes
 
-| Endpoint | Method | Description |
-|----------|---------|-------------|
-| `/api/auth/signin` | POST | NextAuth authentication endpoints |
-| `/startup` | GET/POST | Startup Details |
-| `/create` | GET/POST | Create Startups |
+| Endpoint           | Method   | Description                       |
+| ------------------ | -------- | --------------------------------- |
+| `/api/auth/signin` | POST     | NextAuth authentication endpoints |
+| `/startup`         | GET/POST | Startup Details                   |
+| `/create`          | GET/POST | Create Startups                   |
 
 ## Deployment
 
