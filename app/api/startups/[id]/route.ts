@@ -11,6 +11,9 @@ export async function GET(
   try {
     await connectDB();
 
+    // Ensure the User model is registered on the active connection for populate
+    await import("@/models/User");
+
     const { id } = params;
 
     if (!Types.ObjectId.isValid(id)) {

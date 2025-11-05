@@ -9,6 +9,9 @@ export async function GET(request: NextRequest) {
   try {
     await connectDB();
 
+    // Ensure the User model is registered on the active connection for populate
+    await import("@/models/User");
+
     const searchParams = request.nextUrl.searchParams;
     const search = searchParams.get("search");
 
