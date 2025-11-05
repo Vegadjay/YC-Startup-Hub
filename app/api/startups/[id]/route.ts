@@ -2,15 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Startup from "@/models/Startup";
 import User from "@/models/User";
+import { Types } from "mongoose";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
 
-    const { id } = await params;
+    const { id } = params;
+
+    if (!Types.ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { error: "Invalid startup id" },
+        { status: 400 }
+      );
+    }
 
     const startup = await Startup.findById(id)
       .populate("author", "_id name username bio profilePicture")
