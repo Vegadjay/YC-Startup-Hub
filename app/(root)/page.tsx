@@ -7,6 +7,9 @@ async function getStartups(search?: string) {
   try {
     await connectDB();
 
+    // Ensure the User model is registered for populate
+    await import("@/models/User");
+
     let query: any = { slug: { $ne: null } };
 
     if (search) {
@@ -79,9 +82,7 @@ export default async function Home({
 
         <ul className="card_grid mt-7">
           {posts && posts.length > 0 ? (
-            posts.map((post: any) => (
-              <StartupCard key={post._id} post={post} />
-            ))
+            posts.map((post: any) => <StartupCard key={post._id} post={post} />)
           ) : (
             <p className="no-results">No Startup Found</p>
           )}

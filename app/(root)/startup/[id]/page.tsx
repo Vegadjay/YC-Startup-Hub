@@ -14,6 +14,9 @@ async function getStartup(id: string) {
   try {
     await connectDB();
 
+    // Ensure the User model is registered for populate
+    await import("@/models/User");
+
     const startup = await Startup.findById(id)
       .populate("author", "_id name username bio profilePicture")
       .lean();
